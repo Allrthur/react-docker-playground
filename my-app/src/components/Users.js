@@ -1,9 +1,29 @@
 import React from 'react'
 
-export const Users = ({users}) => {
+export const Users = ({users, hidden}) => {
 
     console.log('users length:::', users.length)
-    if (users.length === 0) return null
+    
+    if(!hidden) return null;
+    
+    if (users.length === 0) return (
+        <div className="container">
+            <h2>Users</h2>
+            <table className="table table-bordered">
+                <thead>
+                <tr>
+                    <th>User Id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr><td colSpan='4' style={{textAlign:'center'}}>Users table is empty</td></tr>
+                </tbody>
+            </table>
+        </div>
+    )
 
     const UserRow = (user,index) => {
 

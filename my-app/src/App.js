@@ -9,10 +9,12 @@ import { getAllUsers, createUser } from './services/UserService'
 
 class App extends Component {
 
+  
   state = {
     user: {},
     users: [],
-    numberOfUsers: 0
+    numberOfUsers: 0,
+    showTable: false
   }
 
   createUser = (e) => {
@@ -26,7 +28,6 @@ class App extends Component {
   getAllUsers = () => {
     getAllUsers()
       .then(users => {
-        console.log(users)
         this.setState({users: users, numberOfUsers: users.length})
       });
   }
@@ -43,7 +44,23 @@ class App extends Component {
       this.setState({user})
   }
 
+  onChangeToggle = (e) => {
+    let showTable = this.state.showTable;
+    if(e.target.checked){
+      this.getAllUsers();
+      showTable = true;
+    }
+    else{
+      showTable = false;
+    } 
+    
+    this.setState({showTable});   
+
+  }
+
   render() {
+
+    console.log(this.state)
     
     return (
       <div className="App">
@@ -62,13 +79,14 @@ class App extends Component {
                 <DisplayBoard
                   numberOfUsers={this.state.numberOfUsers}
                   getAllUsers={this.getAllUsers}
+                  onChangeToggle={this.onChangeToggle}
                 >
                 </DisplayBoard>
             </div>
           </div>
         </div>
         <div className="row mrgnbtm">
-          <Users users={this.state.users}></Users>
+          <Users users={this.state.users} hidden={this.state.showTable}></Users>
         </div>
       </div>
     );

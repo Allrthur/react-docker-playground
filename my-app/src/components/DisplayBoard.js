@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const DisplayBoard = ({numberOfUsers, getAllUsers}) => {
-    
+export const DisplayBoard = ({numberOfUsers, onChangeToggle}) => {
+
     return(
         <div className="display-board">
             <h4>Users Created</h4>
@@ -9,7 +9,9 @@ export const DisplayBoard = ({numberOfUsers, getAllUsers}) => {
             {numberOfUsers}
             </div>
             <div className="btn">
-                <button type="button" onClick={(e) => getAllUsers()} className="btn btn-warning">Get all Users</button>
+                <label className="switch"> Show Users 
+                    <input type="checkbox" style={{marginLeft : 6 + 'px'}} onChange={onChangeToggle}></input>
+                </label>
             </div>
         </div>
     )
